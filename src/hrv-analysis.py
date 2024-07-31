@@ -9,7 +9,11 @@ ppg = nk.ppg_simulate(duration=40, sampling_rate=500, heart_rate=75, random_stat
 
 ppg_signals, info = nk.ppg_process(ppg, sampling_rate=500)
 
-# ppg_real = nk.ppg_process()
+# Set the display options
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
+pd.set_option('display.width', None)
+pd.set_option('display.max_colwidth', None)
 
 # Read the PPG data from CSV
 ppg = pd.read_csv("ppg_sensor_data.csv", header=None)
