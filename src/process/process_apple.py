@@ -3,3 +3,6 @@
 # 
 # It outputs a .csv in a standardized format to allow 
 # correlation with PhysTrax data to be calculated. 
+
+def process(file): 
+    print("Processing Apple data: " + file)

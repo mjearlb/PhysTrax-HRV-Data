@@ -3,3 +3,6 @@
 # 
 # It outputs a .csv in a standardized format to allow 
 # correlation with Apple Watch data to be calculated. 
+
+def process(file): 
+    print("Processing PhysTrax data: " + file)
