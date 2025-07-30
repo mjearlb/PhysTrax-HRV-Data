@@ -10,6 +10,8 @@ import process.process_apple as pa
 import process.process_bangle as pb
 import os.path
 import sys
+from datetime import datetime
+import random
 
 def get_args(): 
     # Add command line arguments
@@ -36,6 +38,14 @@ def main():
     apple = arguments.apple_data
     bangle = arguments.phystrax_data
     output_directory = arguments.output_directory
+    
+    # Create an output directory within the output directory
+    timestamp_str = datetime.now().strftime('%Y%m%d_%H%M%S') # Add current timestamp to output folder
+    random_hex = ''.join(random.choices('0123456789abcdef', k=10)) # Add random hex values to output folder
+    folder_name = f"Processed_Data_{timestamp_str}_{random_hex}"
+    full_path = os.path.join(output_directory, folder_name)
+    output_directory = full_path 
+    os.makedirs(output_directory, exist_ok=True) # Create the new directory to save to
 
     # Check that the input files exist 
     check(apple)
