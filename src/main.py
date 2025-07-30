@@ -33,7 +33,7 @@ def check(filename):
 def main(): 
     # Parse the args
     arguments = get_args()
-    apple = arguments.apple_data 
+    apple = arguments.apple_data
     bangle = arguments.phystrax_data
     output_directory = arguments.output_directory
 
@@ -42,10 +42,8 @@ def main():
     check(bangle)
 
     # Standardize the formatting of each for later comparison
-    processed_apple = pa.process(apple)
-    processed_bangle = pb.process(bangle)
-
-    # Save the new files to the output directory
+    processed_apple_csv = pa.process(apple, output_directory) # Returns a filename
+    processed_bangle_csv = pb.process(bangle, output_directory) # Returns a filename
 
     # Run correlation statistics. Create correlation graphic. Save to output directory
 
