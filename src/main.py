@@ -6,8 +6,8 @@
 # python3 run_correlation.py -a [apple_data].csv -p [phystrax_data].csv -o [output-name]
 
 import argparse
-from process.process_apple import process
-from process.process_bangle import process
+import process.process_apple as pa
+import process.process_bangle as pb
 import os.path
 import sys
 
@@ -33,18 +33,17 @@ def check(filename):
 def main(): 
     # Parse the args
     arguments = get_args()
-    print(arguments)
     apple = arguments.apple_data 
-    phystrax = arguments.phystrax_data
+    bangle = arguments.phystrax_data
     output_directory = arguments.output_directory
 
     # Check that the input files exist 
     check(apple)
-    check(phystrax)
+    check(bangle)
 
     # Standardize the formatting of each for later comparison
-    #process_apple.process(apple)
-    #process_bangle.process(phystrax)
+    processed_apple = pa.process(apple)
+    processed_bangle = pb.process(bangle)
 
     # Save the new files to the output directory
 
