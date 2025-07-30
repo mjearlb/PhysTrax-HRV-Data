@@ -46,6 +46,7 @@ def main():
     full_path = os.path.join(output_directory, folder_name)
     output_directory = full_path 
     os.makedirs(output_directory, exist_ok=True) # Create the new directory to save to
+    print("Saving .csv data to " + output_directory)
 
     # Check that the input files exist 
     check(apple)
