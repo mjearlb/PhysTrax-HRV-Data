@@ -13,7 +13,7 @@ def process(file, output_directory):
 
     # Open the input file and read the raw Apple heart rate 
     # data as a pandas dataframe. 
-    df = pd.read_csv(file, skiprows=1) # Must skip the first row since 
+    df = pd.read_csv(file, skiprows=1) # Must skip the first row since that is an extra header row
     
     # Extract the desired data from the input csv file (timestamps & 
     # heart rate only). 
