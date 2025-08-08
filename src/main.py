@@ -21,6 +21,7 @@ from datetime import datetime
 import random
 import pandas as pd
 
+# Parses the command line arguments
 def get_args(): 
     # Add command line arguments
     parser = argparse.ArgumentParser()
@@ -35,11 +36,13 @@ def get_args():
     args = parser.parse_args()
     return args
 
+# Checks that input file exists
 def check(filename): 
     if not os.path.exists(filename): 
         print("Error: file " + filename + " does not exist!")
         sys.exit(1)
 
+# The main method of the program. This controls the entire program. 
 def main(): 
     # Parse the args
     arguments = get_args()
