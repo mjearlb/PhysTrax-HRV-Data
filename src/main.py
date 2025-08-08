@@ -8,10 +8,12 @@
 import argparse
 import process.process_apple as pa
 import process.process_bangle as pb
+import stats.correlation as corr
 import os.path
 import sys
 from datetime import datetime
 import random
+import pandas as pd
 
 def get_args(): 
     # Add command line arguments
@@ -55,8 +57,11 @@ def main():
     # Standardize the formatting of each for later comparison
     processed_apple_csv = pa.process(apple, output_directory) # Returns a filename
     processed_bangle_csv = pb.process(bangle, output_directory) # Returns a filename
+    # print(pd.read_csv(processed_apple_csv))
+    # print(pd.read_csv(processed_bangle_csv))
 
     # Run correlation statistics. Create correlation graphic. Save to output directory
+    corr.get_correlation(processed_apple_csv, processed_bangle_csv)
 
     # Print summary
 
