@@ -2,8 +2,14 @@
 # the correlation between Apple Watch and PhysTrax
 # heart rate data. 
 # 
-# It takes an input of 2 .csv files. Format it like so: 
-# python3 run_correlation.py -a [apple_data].csv -p [phystrax_data].csv -o [output-name]
+# It takes an input of 2 .csv files. It will output the 
+# processed versions of the 2 input .csv's as separate
+# .csv files. All output will be placed into a new directory
+# inside of the chosen [output-filepath]. It can be found at
+# [output-filepath]/Processed_Data_[DATE]_[TIME]_[HEX CODE]
+# 
+# Usage: 
+# python3 run_correlation.py -a [apple_data].csv -p [phystrax_data].csv -o [output-filepath]
 
 import argparse
 import process.process_apple as pa
