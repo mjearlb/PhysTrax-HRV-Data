@@ -5,6 +5,7 @@
 # It then run correlation statistics on the 2 files. 
 
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # This is the wrapper function that will be called 
 # from the main program. 
@@ -37,6 +38,9 @@ def get_correlation(file1, file2):
     corr_value = corr_matrix.loc['Heart Rate (BPM)_Apple', 'Heart Rate (BPM)_Bangle']
     print(f"Correlation coefficient: {corr_value:.4f}")
 
+    # Plot the data 
+    plot_data(combined_df)
+
 # check_alignment makes sure that the timestamps of the 
 # 2 datasets have at least some overlap. If they don't, 
 # they return False. 
@@ -65,3 +69,16 @@ def trim_timestamps(data1, data2):
     data2_trimmed = data2[(data2["Timestamp"] >= start) & (data2["Timestamp"] <= end)].copy()
 
     return data1_trimmed, data2_trimmed
+
+def plot_data(combined_df): 
+    plt.figure(figsize=(12, 6))
+    plt.plot(combined_df["Timestamp"], combined_df["Heart Rate (BPM)_Apple"], label="Apple Watch", marker="o")
+    plt.plot(combined_df["Timestamp"], combined_df["Heart Rate (BPM)_Bangle"], label="Bangle/PhysTrax", marker="o")
+    
+    plt.xlabel("Time")
+    plt.ylabel("Heart Rate (BPM)")
+    plt.title("Apple vs Bangle Heart Rate Data")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()

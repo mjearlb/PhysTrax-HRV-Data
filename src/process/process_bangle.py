@@ -8,7 +8,7 @@ import pandas as pd
 import os
 import numpy as np
 
-def process(file, output_directory): 
+def process(file, output_directory, offset=0): 
     print("Processing PhysTrax data: " + file)
 
     # Open the input file and read the raw Apple heart rate 
@@ -23,6 +23,9 @@ def process(file, output_directory):
     heart_rate_bpm = df['Heart Rate(bpm)'] # Needs no further adjustments
     timestamp_list = df['Timestamp'].tolist() 
     timestamps_normalized = pd.to_datetime(timestamp_list, format="%b %d %Y %H:%M:%S.%f", errors="raise")
+
+    # Add the offset
+    timestamps_normalized = timestamps_normalized + pd.to_timedelta(offset, unit='h')
 
     # Average the data. 
     # 

@@ -29,8 +29,10 @@ def get_args():
                         help="The path to the .csv file containing the Apple Watch heart rate & timestamp data.")
     parser.add_argument("-p", "--phystrax_data", required=True, 
                         help="The path to the .csv containing the PhysTrax heart rate & timestamp data. ")
-    parser.add_argument("-o", "--output_directory", "--output_folder", required=True,
+    parser.add_argument("-out", "--output_directory", "--output_folder", required=True,
                         help="The path to the folder which the processed .csv's and correlation figures should be placed.")
+    parser.add_argument("-o", "--offset", type=int,
+                        help="This offset is applied to the Bangle/PhysTrax data. An offset of 1 will move all timestamps forward 1 hour.")
 
     # Parse the command line arguments
     args = parser.parse_args()
@@ -49,6 +51,7 @@ def main():
     apple = arguments.apple_data
     bangle = arguments.phystrax_data
     output_directory = arguments.output_directory
+    offset = arguments.offset
     
     # Create an output directory within the output directory
     timestamp_str = datetime.now().strftime('%Y%m%d_%H%M%S') # Add current timestamp to output folder
@@ -63,8 +66,12 @@ def main():
     check(apple)
     check(bangle)
 
+    # Check offset
+    if not offset: 
+        offset = 0
+
     # Standardize the formatting of each for later comparison
-    processed_apple_csv = pa.process(apple, output_directory) # Returns a filename
+    processed_apple_csv = pa.process(apple, output_directory, offset) # Returns a filename
     processed_bangle_csv = pb.process(bangle, output_directory) # Returns a filename
     # print(pd.read_csv(processed_apple_csv))
     # print(pd.read_csv(processed_bangle_csv))
